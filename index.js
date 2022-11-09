@@ -18,6 +18,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const servicesCollection = client.db('e-doctor').collection('services')
+    const reviewsCollection = client.db('e-doctor').collection('reviews')
     /// only three services in home page
     app.get('/services', async (req, res) => {
       const query = {}
@@ -46,6 +47,20 @@ async function run() {
       const addService = req.body
       const result = await servicesCollection.insertOne(addService)
       res.send(result)
+    })
+
+    app.post('/reviews', async (req, res) => {
+      const addReviews = req.body
+      const result = await reviewsCollection.insertOne(addReviews)
+      res.send(result)
+    })
+
+    app.get('/reviews', async (req, res) => {
+      const query = {}
+      const cursor = reviewsCollection.find(query)
+      const reviews = await cursor.toArray()
+
+      res.send(reviews)
     })
   } finally {
   }
