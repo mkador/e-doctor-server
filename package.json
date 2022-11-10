@@ -8,6 +8,7 @@
   },
   "keywords": [],
   "start":"node index.js",
+  "build":"node index.js",
   "author": "",
   "license": "ISC",
   "dependencies": {
